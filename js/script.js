@@ -3,7 +3,8 @@ const username = "andicuevasp";
 const repoListElement = document.querySelector(".repo-list");
 const repoInfoElement = document.querySelector(".repos");
 const repoData = document.querySelector(".repo-data");
-
+const backToRepoButton = document.querySelector("button");
+const filterInput = document.querySelector("input");
 
 
 const gitUserInfo = async function(){
@@ -42,6 +43,7 @@ const gitRepoList = async function(){
 };
 
 const showRepos = function(repos){
+  filterInput.classList.remove("hide");
   for(const repo of repos){
   const repoItem = document.createElement("li");
   repoItem.classList.add("repo");
@@ -84,6 +86,7 @@ const showRepoInfo = function(repoInfo,languages){
   repoData.innerHTML = "";
   repoData.classList.remove("hide");
   repoInfoElement.classList.add("hide");
+  backToRepoButton.classList.remove("hide");
   const div = document.createElement("div");
   div.innerHTML = `<h3>Name: ${repoInfo.name}</h3>
   <p>Description: ${repoInfo.description}</p>
@@ -95,5 +98,25 @@ const showRepoInfo = function(repoInfo,languages){
 
 };
 
+backToRepoButton.addEventListener("click", function(e){
+  repoInfoElement.classList.remove("hide");
+  repoData.classList.add("hide");
+  backToRepoButton.classList.add("hide");
+});
+
+filterInput.addEventListener("input",function(e){
+  const searchText = e.target.value;
+  const repos = document.querySelectorAll(".repo");
+  const searchLowerText = searchText.toLowerCase();
+
+  for(const repo of repos){
+    const repoLowerText= repo.innerText.toLowerCase();
+    if(repoLowerText.includes(searchLowerText)){
+      repo.classList.remove("hide");
+    } else {
+      repo.classList.add("hide");
+    }
+  }
 
 
+});
