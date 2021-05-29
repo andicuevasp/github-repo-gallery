@@ -17,7 +17,7 @@ const showUserInfo = function(data) {
     const userInfo = document.createElement("div");
     userInfo.classList.add("user-info");
     userInfo.innerHTML = `<figure>
-    <img alt="user avatar" src=${data.avatar_url} />
+   <img alt="user avatar" src=${data.avatar_url} />
   </figure>
   <div>
     <p><strong>Name:</strong> ${data.name}</p>
@@ -28,6 +28,7 @@ const showUserInfo = function(data) {
 
   overview.append(userInfo);
   gitRepoList();
+
 };
 
 const gitRepoList = async function(){
@@ -37,15 +38,13 @@ const gitRepoList = async function(){
   showRepos(repoData);
 };
 
-
 const showRepos = function(repos){
   for(const repo of repos){
   const repoItem = document.createElement("li");
   repoItem.classList.add("repo");
-  repoItem.innerHTML = `<h3>repo.${name}</h3>`;
+  repoItem.innerHTML = `<h3>${repo.name}</h3>`;
 
-  repoListItem.append(repoItem);
+  repoListElement.append(repoItem);
 
   }
 };
-
